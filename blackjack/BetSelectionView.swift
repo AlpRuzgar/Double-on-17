@@ -29,40 +29,19 @@ struct BetSelectionView: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 10) {
+            VStack(spacing: 16) {
                 //MARK: Back button & chip amount
                 HStack {
                     BackButton()
                     Spacer()
-                    HStack(spacing: 6) {
-                        Image(systemName: "dollarsign.circle.fill")
-                            .foregroundStyle(themeManager.current.colors.secondary)
-                        Text("\(vm.level.chipsOwned)")
-                            .font(.system(size: 17, weight: .bold))
-                            .foregroundStyle(themeManager.current.colors.secondary)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 6)
-                    .background(.black.opacity(0.5), in: RoundedRectangle(cornerRadius: 8))
-                    .overlay{
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(themeManager.current.colors.secondary.opacity(0.9), lineWidth: 2)
-                    }
-                    .shadow(color: themeManager.current.colors.secondary.opacity(0.6), radius: 4)
                 }
                 .padding(.horizontal, 10)
-                .padding(.vertical, 3)
                 .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
+                
                 //MARK: Header — balance, title, divider, bet amount
                 VStack(spacing: 6) {
-                    HStack {
-                        Spacer()
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 10)
-                    
                     Text("PLACE YOUR BET")
-                        .font(.system(size: 28, weight: .bold))
+                        .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(themeManager.current.colors.text)
                         .tracking(1)
                         .shadow(color: .black.opacity(0.5), radius: 4, x: 1, y: 2)
@@ -81,15 +60,14 @@ struct BetSelectionView: View {
                     }
                     .padding(.horizontal, 50)
                     
-                    Text("BET: \(vm.startingBet)")
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundStyle(themeManager.current.colors.secondary)
-                        .shadow(color: .black.opacity(0.6), radius: 4, x: 0, y: 2)
-                    Text("TARGET CHIPS: \(vm.level.requiredChips)")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundStyle(themeManager.current.colors.secondary)
-                        .shadow(color: .black.opacity(0.6), radius: 4, x: 0, y: 2)
-
+                    // Stakes mode has no target
+                    if vm.level.id != Level.stakesID {
+                        Text("TARGET CHIPS: \(vm.level.requiredChips)")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(themeManager.current.colors.secondary)
+                            .shadow(color: .black.opacity(0.6), radius: 4, x: 0, y: 2)
+                    }
+                    
                 }
                 .opacity(headerVisible ? 1 : 0)
                 .offset(y: headerVisible ? 0 : -20)
@@ -100,6 +78,10 @@ struct BetSelectionView: View {
                         Text("YOUR BET")
                             .font(.system(size: 11, weight: .bold))
                             .foregroundStyle(themeManager.current.colors.secondary)
+                            .tracking(2)
+                        Text("\(vm.startingBet)")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(themeManager.current.colors.text)
                             .tracking(2)
                         Spacer()
                         Text("TAP TO REMOVE")
@@ -176,7 +158,7 @@ struct BetSelectionView: View {
 
                         }
                     }
-                    .padding(.vertical, 8)
+                    .padding(8)
                 }
                 .background(.black.opacity(0.55), in: RoundedRectangle(cornerRadius: 12))
                 .overlay(
@@ -193,6 +175,10 @@ struct BetSelectionView: View {
                         Text("CHIP TRAY")
                             .font(.system(size: 11, weight: .bold))
                             .foregroundStyle(themeManager.current.colors.secondary)
+                            .tracking(2)
+                        Text("\(vm.level.chipsOwned)")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(themeManager.current.colors.text)
                             .tracking(2)
                         Spacer()
                         Text("TAP TO ADD")
@@ -245,8 +231,8 @@ struct BetSelectionView: View {
                 .offset(y: chipsVisible ? 0 : 20)
                 
                 // MARK: - Action Buttons
-                VStack(spacing: 6) {
-                    HStack(spacing: 8) {
+                VStack(spacing: 12) {
+                    HStack(spacing: 12) {
                         ActionButton(
                             text: "MIN BET",
                             icon: "arrow.down.circle.fill",
@@ -260,7 +246,6 @@ struct BetSelectionView: View {
                             },
                             doesPlaySound: false
                         )
-                        .padding(.trailing,3)
 
                         ActionButton(
                             text: "MAX BET",
@@ -275,9 +260,7 @@ struct BetSelectionView: View {
                             },
                             doesPlaySound: false
                         )
-                        .padding(.leading,3)
                     }
-                    .padding(.bottom, 6)
                     ActionButton(
                         text: "PLACE BET",
                         icon: "checkmark.circle.fill",

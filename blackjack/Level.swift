@@ -108,6 +108,11 @@ class Level: Identifiable, ObservableObject {
         resetCompletion()
     }
 
+    // MARK: - Stakes
+
+    /// Stakes mode has no target or lock; requiredChips and lockDuration are unused for it.
+    static let stakesID = -1
+
     // MARK: - UserDefaults Keys
 
     private static func completionDefaultsKey(for id: Int) -> String {

@@ -73,7 +73,7 @@ struct LevelView: View {
 }
 
 #Preview {
-    LevelOutcomeOverlay(isWon: true) {
+    LevelOutcomeOverlay(isWon: false) {
         
     }
     .environment(ThemeManager())

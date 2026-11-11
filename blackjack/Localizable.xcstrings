@@ -58,6 +58,7 @@
       }
     },
     "BET: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -86,6 +87,9 @@
           }
         }
       }
+    },
+    "BROKE" : {
+
     },
     "BUST" : {
       "localizations" : {
@@ -322,6 +326,9 @@
         }
       }
     },
+    "High Stakes" : {
+
+    },
     "Hit: draw a card." : {
       "localizations" : {
         "tr" : {
@@ -371,6 +378,9 @@
           }
         }
       }
+    },
+    "Leaving mid-hand forfeits your bet." : {
+
     },
     "Legend's Table" : {
       "localizations" : {
@@ -433,6 +443,9 @@
         }
       }
     },
+    "Lose them all and you're out until you win more at the tables." : {
+
+    },
     "MAIN MENU" : {
       "localizations" : {
         "tr" : {
@@ -494,6 +507,9 @@
           }
         }
       }
+    },
+    "NO COINS" : {
+
     },
     "Not enough coins" : {
       "localizations" : {
@@ -638,6 +654,9 @@
           }
         }
       }
+    },
+    "STAKES" : {
+
     },
     "Stand: end your turn." : {
       "localizations" : {
@@ -865,6 +884,9 @@
         }
       }
     },
+    "You lost all your coins. Come back once you've won more at the tables." : {
+
+    },
     "You reached the goal!" : {
       "localizations" : {
         "tr" : {
@@ -894,6 +916,9 @@
           }
         }
       }
+    },
+    "You're playing with your real coins. Every win and loss counts." : {
+
     },
     "YOUR BET" : {
       "localizations" : {

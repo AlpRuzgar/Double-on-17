@@ -30,6 +30,7 @@ struct BackButton: View {
                 Text("Back")
                     .font(.system(size: 17, weight: .bold))
             }
+            .frame(height: 16)
             .foregroundStyle(themeManager.current.colors.secondary)
             .padding(.horizontal, 14)
             .padding(.vertical, 10)

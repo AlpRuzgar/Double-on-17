@@ -55,27 +55,27 @@ struct ActionButton: View {
                 HStack(spacing: 12) {
                     if let icon {
                         Image(systemName: icon)
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.system(size: 16, weight: .bold))
                     }
                     if let text {
                         Text(text)
-                            .font(.system(size:20, weight: .bold))
+                            .font(.system(size:16, weight: .bold))
                             .tracking(1.5)
                     }
                 }
                 .foregroundStyle(foregroundColor)
-                .frame(height: 62)
+                .frame(height: 56)
                 .frame(maxWidth: .infinity)
                 .background(
                     RoundedRectangle(cornerRadius: 14, style: .continuous)
                         .fill(backgroundColor)
                 )
-                .overlay(content: {
-                    RoundedRectangle(cornerRadius: 14)
-                        .foregroundStyle(LinearGradient(colors: [.white.opacity(0),.white.opacity(0.25)], startPoint: .leading, endPoint: .trailing))
-                })
+//                .overlay(content: {
+//                    RoundedRectangle(cornerRadius: 14)
+//                        .foregroundStyle(LinearGradient(colors: [.white.opacity(0),.white.opacity(0.25)], startPoint: .leading, endPoint: .trailing))
+//                })
                 .clipShape(RoundedRectangle(cornerRadius: 14))
-                .shadow(color: backgroundColor, radius: 15)
+                .shadow(color: backgroundColor, radius: 5)
 
             case .compact:
                 Image(systemName: icon ?? "")
@@ -83,17 +83,11 @@ struct ActionButton: View {
                     .foregroundStyle(foregroundColor)
                     .frame(width: 70, height: 70)
                     .background(backgroundColor, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(
-                                LinearGradient(
-                                    colors: [.white.opacity(0.3), .black.opacity(0.25)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 1.5
-                            )
-                    )
+                //                .overlay(content: {
+                //                    RoundedRectangle(cornerRadius: 14)
+                //                        .foregroundStyle(LinearGradient(colors: [.white.opacity(0),.white.opacity(0.25)], startPoint: .leading, endPoint: .trailing))
+                //                })
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
                     .shadow(color: backgroundColor.opacity(0.6), radius: 8, x: 0, y: 4)
             }
         }

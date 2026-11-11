@@ -10,11 +10,16 @@ import SwiftUI
 
 struct StartView: View {
     @Environment(ThemeManager.self) var themeManager
-
+    @Environment(User.self) private var user
+    
     @State private var showResetAlert = false
     @State private var navigateToLevels = false
     @State private var navigateToEndless = false
     @State private var navigateToThemes = false
+    @State private var navigateToStakes = false
+    var stakesActive: Bool {
+        user.coins > 0
+    }
     
     @State private var isInfoPresented  = false
     @State private var endlessGameActive = false
@@ -70,20 +75,40 @@ struct StartView: View {
                             action: { navigateToLevels = true },
                             doesPlaySound: true
                         )
-//                        ActionButton(
-//                            text: "ENDLESS MODE",
-//                            icon: "infinity",
-//                            backgroundColor: themeManager.current.colors.alert,
-//                            foregroundColor: themeManager.current.colors.text,
-//                            action: { navigateToEndless = true },
-//                            doesPlaySound: true
-//                        )
-                        Button {
-                            withAnimation(.easeInOut(duration: 0.35)) {
-                                endlessGameActive = true
+                        ActionButton(
+                            text: "ENDLESS",
+                            icon: "infinity",
+                            backgroundColor: themeManager.current.colors.alert,
+                            foregroundColor: themeManager.current.colors.text,
+                            action: { navigateToEndless = true },
+                            doesPlaySound: true
+                        )
+                        ActionButton(text: "STAKES",
+                            icon: "dollarsign.circle.fill",
+                            backgroundColor: themeManager.current.colors.extra,
+                            foregroundColor: themeManager.current.colors.text,
+                            action: {
+                                navigateToStakes = true
+                            },
+                            doesPlaySound: true)
+                        .disabled(!stakesActive)
+                        .overlay {
+                            if !stakesActive {
+                                // Compact version of LevelButton's lock overlay, sized for a 56pt button
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                        .fill(.black.opacity(0.78))
+                                    HStack(spacing: 10) {
+                                        Image(systemName: "lock.fill")
+                                            .font(.system(size: 16, weight: .bold))
+                                            .foregroundStyle(.green)
+                                        Text("NO COINS")
+                                            .font(.system(size: 16, weight: .bold))
+                                            .tracking(1.5)
+                                            .foregroundStyle(themeManager.current.colors.text)
+                                    }
+                                }
                             }
-                        } label: {
-                            NavigationLabel(icon: "infinity", text: String(localized:"ENDLESS"), foregroundColor: themeManager.current.colors.text, backgroundColor: themeManager.current.colors.alert)
                         }
                     }
                     .padding(.horizontal, 24)
@@ -135,6 +160,9 @@ struct StartView: View {
             }
             .navigationDestination(isPresented: $navigateToEndless) {
                 GameView(viewModel: GameViewModel(gameType: .endless), isLevel: false)
+            }
+            .navigationDestination(isPresented: $navigateToStakes) {
+                StakesView()
             }
             .navigationDestination(isPresented: $navigateToThemes) {
                 ThemeStoreView()
